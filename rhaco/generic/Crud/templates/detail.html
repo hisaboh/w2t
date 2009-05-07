@@ -1,0 +1,12 @@
+<rt:extends href="./find.html" />
+
+<rt:block name="content">
+<a href="{$f.link_find()}">read</a>
+<a href="{$f.link_update($object)}">update</a>
+
+<table class="detail">
+<rt:loop param="{$object.values()}" key="name" var="obj">
+<tr><th>{$obj.label()}</th><td>{$t.html($obj.value())}</td></tr>
+</rt:loop>
+</table>
+</rt:block>

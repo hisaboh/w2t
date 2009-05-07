@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style type="text/css">
+		body{ margin:0; padding:0; }
+		.list{ margin: 5px; border-top:1px solid #cccccc; border-left:1px solid #cccccc;
+				border-collapse:collapse; border-spacing:0; empty-cells:show; background-color: #eeeeee; }
+		.list .even{ background-color: #fefefe; }
+		.list .odd{ background-color: #eeeeee; }
+		.list th{ border-right:1px solid #cccccc; border-bottom:1px solid #cccccc; color:#ff3333; font-weight: bold;
+					background-color: #ffffff; background-position:left top; text-align:center; padding: 3px; font-size: 14px; }
+		.list td{ border-right:1px solid #cccccc; border-bottom:1px solid #cccccc; color: #666666; padding: 3px; font-size: 11px; }
+		
+		.detail{ margin: 5px; border-top:1px solid #cccccc; border-left:1px solid #cccccc;
+				border-collapse:collapse; border-spacing:0; empty-cells:show; background-color: #eeeeee; }
+		.detail th{ border-right:1px solid #cccccc; border-bottom:1px solid #cccccc; color:#ff3333; font-weight: bold;
+					background-color: #ffffff; background-position:left top; text-align:right; padding: 3px; font-size: 14px; }
+		.detail td{ border-right:1px solid #cccccc; border-bottom:1px solid #cccccc; color: #666666; padding: 3px; font-size: 11px; }
+		
+		.pager{ margin: 5px; font-size: 13px; }
+		.pager strong{ padding:3px 4px 2px 4px; text-align:center; color:#ff3333; }
+		.pager a{ padding:3px 4px 2px 4px; text-align:center; text-decoration:none; font-weight:bold; color:#666666; border:1px solid #cccccc; background:#eeeeee; }
+		.pager a:hover{ background:#ffcc99; }
+		.pager a:visited{ background:#eeeeee; }
+		.pager a:active{ background:#ccffcc; }
+	</style>
+</head>
+<body>
+
+<rt:block name="content">
+<a href="{$f.link_create()}">create</a>
+
+<form rt:ref="true">
+	<input type="text" name="query" />
+	<input type="submit" value="search" />
+</form>
+
+<div class="pager">
+	<rt:pager />
+</div>
+
+<table class="list" rt:param="object_list" rt:var="object" rt:counter="counter">
+<thead>
+	<tr>
+		<th></th>
+		<rt:loop param="{$model.values()}" key="name" var="obj">
+		<th><a href="?order={$name}&porder={$porder}&query={$query}">{$obj.label()}</a></th>
+		</rt:loop>
+	</tr>
+</thead>
+<tbody>
+	<tr class="{$t.evenodd($counter)}">
+		<td>
+			<form action="{$f.link_drop()}" method="post">
+				<rt:loop param="{$object.values()}" key="name" var="obj">
+					<rt:if param="{$obj.primary()}">
+						<input type="hidden" name="primary[{$name}]" value="{$obj.value()}" />
+					</rt:if>
+				</rt:loop>
+				<input type="submit" value="drop" />
+			</form>
+		</td>
+		<rt:loop param="{$object.values()}" var="obj">
+			<rt:if param="{$obj.primary()}">
+				<td><a href="{$f.link_detail($object)}">{$t.html($obj.value(),200)}</a></td>
+			<rt:else />
+				<td>{$t.html($obj.value(),200)}</td>
+			</rt:if>
+		</rt:loop>
+	</tr>
+</tbody>
+</table>
+</rt:block>
+</body>
+</html>

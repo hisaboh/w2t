@@ -1,0 +1,9 @@
+<rt:extends href="./find.html" />
+
+<rt:block name="content">
+
+<table class="list" rt:param="{$models}" rt:var="file">
+<tr class="{$t.evenodd($counter)}"><td><a href="{$f.link_find()}{$file.oname()}">{$file.oname()}</a></td></tr>
+</table>
+
+</rt:block>

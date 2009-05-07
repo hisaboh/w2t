@@ -1,0 +1,18 @@
+<rt:extends href="./find.html" />
+
+<rt:block name="content">
+<a href="{$f.link_find()}">read</a>
+
+<form method="post">
+<table class="detail">
+<rt:loop param="{$model.values()}" key="column_name" var="obj">
+<tr>
+	<th>{$obj.label()}</th>
+	<td>{$f.form($obj.type(),$column_name,$$column_name)}</td>
+</tr>
+</rt:loop>
+</table>
+<input type="submit" value="submit" />
+</form>
+<rt:invalid />
+</rt:block>
