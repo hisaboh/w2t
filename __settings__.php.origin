@@ -1,0 +1,10 @@
+<?php
+require("rhaco/rhaco2");
+def("core.Lib@server","http://p.rhaco.org");
+Rhaco::def("core.Log@disp","debug");
+Rhaco::def("core.Log@file","debug");
+def("arbo.service.TwitterAPI@user", "");
+def("arbo.service.TwitterAPI@password", "");
+def("arbo.service.WassrAPI@user", "");
+def("arbo.service.WassrAPI@password", "");
+?>
